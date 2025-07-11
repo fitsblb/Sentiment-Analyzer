@@ -8,6 +8,7 @@ The project utilizes the [Yelp Open Dataset](https://www.kaggle.com/datasets/cap
 
 *   **text**: The text of the review.
 *   **stars**: The star rating given by the reviewer (1 to 5 stars).
+  >![alt text](image.png)
 
 A subset of the dataset ("Final.csv") is loaded from Kaggle using the `kagglehub` library. The code uses the entire dataset for final training.
 
@@ -72,6 +73,70 @@ The project's code is organized as follows:
 *   **`utility.py`**: Contains reusable functions for data loading, preprocessing, model configuration, training, and evaluation.  (See "Reusable Functions" section below for details).
 *   **`Final_Training.ipynb`**: Jupyter Notebook containing the main workflow for final model training and evaluation using the best hyperparameters.
 
+## 📁 File Organization
+
+```
+Sentiment-Analyzer/
+├── 📓 HyperParamSearch.ipynb          # Hyperparameter optimization notebook with Optuna
+├── 📓 Final_Training.ipynb            # Complete model training and deployment pipeline
+├── 🐍 utility.py                     # Reusable functions for data processing and model training
+├── 📋 requirements.txt                # Project dependencies (cleaned and optimized)
+├── 🖼️ image.png                       # Dataset sample visualization for README
+├── 🔧 widget_repair.py               # Jupyter widget compatibility fixes
+├── 📖 README.md                      # Project documentation (this file)
+├── 
+├── 📁 Pre_processed/                  # Preprocessed dataset splits
+│   ├── 📁 train/                     # Training data
+│   │   ├── data-00000-of-00001.arrow # Tokenized training examples
+│   │   ├── dataset_info.json        # Dataset metadata
+│   │   └── state.json               # Dataset state information
+│   ├── 📁 val/                      # Validation data
+│   │   ├── data-00000-of-00001.arrow # Tokenized validation examples
+│   │   ├── dataset_info.json        # Dataset metadata
+│   │   └── state.json               # Dataset state information
+│   └── 📁 test/                     # Test data
+│       ├── data-00000-of-00001.arrow # Tokenized test examples
+│       ├── dataset_info.json        # Dataset metadata
+│       └── state.json               # Dataset state information
+├── 
+├── 📁 Yelp_Model/                     # Trained model artifacts
+│   ├── config.json                   # Model configuration (DistilBERT settings)
+│   ├── model.safetensors            # Model weights (safe format)
+│   ├── special_tokens_map.json      # Special token mappings
+│   ├── tokenizer_config.json        # Tokenizer configuration
+│   ├── tokenizer.json               # Tokenizer vocabulary and rules
+│   ├── training_args.bin            # Training arguments used
+│   └── vocab.txt                    # Vocabulary file
+├── 
+└── 📁 __pycache__/                   # Python bytecode cache
+    └── utility.cpython-311.pyc      # Compiled utility functions
+```
+
+### 📝 File Descriptions
+
+#### **Core Notebooks**
+- **`HyperParamSearch.ipynb`**: Interactive notebook for hyperparameter optimization using Optuna. Contains the complete pipeline from data loading to model evaluation with intelligent parameter search.
+- **`Final_Training.ipynb`**: Production training notebook that uses optimized hyperparameters to train the final model and deploy it to Hugging Face Hub.
+
+#### **Python Modules**
+- **`utility.py`**: Central module containing all reusable functions including data loading, EDA, preprocessing, model configuration, training, and evaluation utilities.
+- **`requirements.txt`**: Minimalist dependencies file containing only necessary packages (no unused imports like NLTK or PEFT).
+
+#### **Data Directories**
+- **`Pre_processed/`**: Contains preprocessed and tokenized datasets split into train/validation/test sets using Hugging Face Datasets format for efficient loading.
+- **`Yelp_Model/`**: Trained model directory containing the fine-tuned DistilBERT model, tokenizer, and all configuration files ready for deployment.
+
+#### **Supporting Files**
+- **`widget_repair.py`**: Utility script for fixing Jupyter widget compatibility issues in different environments.
+- **`image.png`**: Sample dataset visualization used in README documentation.
+
+### 🚀 Workflow Integration
+
+1. **Development Phase**: `HyperParamSearch.ipynb` → Find optimal hyperparameters
+2. **Production Phase**: `Final_Training.ipynb` → Train final model with best settings
+3. **Deployment**: Model artifacts in `Yelp_Model/` → Ready for Hugging Face Hub or local serving
+4. **Reusability**: `utility.py` → Modular functions for easy project extension
+
 ## Reusable Functions (from `utility.py`)
 
 *   **`load_dataset(file_path, columns)`**: Loads the dataset from a specified file path, selecting specified columns.
@@ -88,8 +153,8 @@ The project's code is organized as follows:
 
 1.  **Clone the repository.**
 2.  **Install the required libraries:**
-    ```bash
-    pip install datasets transformers scikit-learn kagglehub nltk optuna
+    ```
+    pip install -r requirements.txt
     ```
 3.  **Download the Yelp Open Dataset** and place the "Final.csv" file in the appropriate directory or update the `file_path` variable in the notebook.
 4.  **Run the `Final_Training.ipynb` notebook.**
