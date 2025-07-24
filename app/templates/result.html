@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .sentiment {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .positive {
+            color: green;
+        }
+
+        .neutral {
+            color: orange;
+        }
+
+        .negative {
+            color: red;
+        }
+
+        .confidence-container {
+            width: 60%;
+            margin: 20px auto;
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+
+        .confidence-bar {
+            height: 25px;
+            border-radius: 5px;
+            background-color: steelblue;
+            width: {{ confidence * 100 }}%;
+            text-align: center;
+            color: white;
+            line-height: 25px;
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prediction Result</h1>
+
+    <p><strong>Input:</strong> {{ input_text }}</p>
+
+    <p class="sentiment 
+        {% if prediction == 'Positive' %}positive
+        {% elif prediction == 'Neutral' %}neutral
+        {% elif prediction == 'Negative' %}negative
+        {% endif %}">
+        Sentiment: {{ prediction }}
+    </p>
+
+    <div class="confidence-container">
+        <div class="confidence-bar">
+            {{ confidence * 100 }}%
+        </div>
+    </div>
+
+    <a href="/">🔁 Try another</a>
+</body>
+</html>

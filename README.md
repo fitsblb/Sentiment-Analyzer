@@ -3,12 +3,32 @@
 ## Project Task
 This project aims to build a sentiment analysis model using a pre-trained Language Model (LLM) to classify Yelp restaurant reviews into three sentiment categories: **Positive**, **Neutral**, and **Negative**. The model is fine-tuned on a subset of the Yelp Open Dataset to predict the sentiment expressed in the review text. Check it out here [Yelp Sentiment Analyzer](https://huggingface.co/spaces/fitsblb/YelpSentimentAnalyzer) and check out the model here if you want to play with it [model](https://huggingface.co/fitsblb).
 
+## 🧪 Inference Web App
+
+This project also includes a Flask web app that:
+- Accepts text input from the user
+- Uses the fine-tuned Hugging Face model `fitsblb/YelpReviewsAnalyzer`
+- Predicts sentiment and displays confidence
+- Is styled for basic usability
+
+>![alt text](image/input.png)
+>![alt text](image/output.png)
+
+### ▶️ To Run Locally:
+
+```bash
+cd app
+pip install -r requirements.txt
+python app.py
+```
+
 ## Dataset
 The project utilizes the [Yelp Open Dataset](https://www.kaggle.com/datasets/capple7/yelp-open-data-philly-restaurants) focusing on restaurant reviews. The dataset contains:
 
 *   **text**: The text of the review.
 *   **stars**: The star rating given by the reviewer (1 to 5 stars).
-  >![alt text](image.png)
+  
+>![alt text](image/image.png)
 
 A subset of the dataset ("Final.csv") is loaded from Kaggle using the `kagglehub` library. The code uses the entire dataset for final training.
 
@@ -77,13 +97,28 @@ The project's code is organized as follows:
 
 ```
 Sentiment-Analyzer/
-├── 📓 HyperParamSearch.ipynb          # Hyperparameter optimization notebook with Optuna
-├── 📓 Final_Training.ipynb            # Complete model training and deployment pipeline
-├── 🐍 utility.py                     # Reusable functions for data processing and model training
+├── � utility.py                     # Reusable functions for data processing and model training
 ├── 📋 requirements.txt                # Project dependencies (cleaned and optimized)
-├── 🖼️ image.png                       # Dataset sample visualization for README
 ├── 🔧 widget_repair.py               # Jupyter widget compatibility fixes
 ├── 📖 README.md                      # Project documentation (this file)
+├── 
+├── 📁 Notebooks/                      # Jupyter notebooks for development and analysis
+│   ├── 📓 HyperParamSearch.ipynb     # Hyperparameter optimization notebook with Optuna
+│   └── 📓 Final_Training.ipynb       # Complete model training and deployment pipeline
+├── 
+├── � app/                           # Flask web application for model deployment
+│   ├── 🐍 app.py                    # Main Flask application file
+│   ├── 🐍 model.py                  # Model loading and prediction functions
+│   ├── � templates/                # HTML templates for web interface
+│   │   ├── home.html               # Home page template
+│   │   └── result.html             # Results page template
+│   ├── 📁 static/                   # Static assets (CSS, JS, images)
+│   └── 📁 __pycache__/              # Python bytecode cache
+├── 
+├── 📁 image/                         # Project images and visualizations
+│   ├── 🖼️ image.png                  # Dataset sample visualization for README
+│   ├── �️ input.png                  # Application input screenshot
+│   └── �️ output.png                 # Application output screenshot
 ├── 
 ├── 📁 Pre_processed/                  # Preprocessed dataset splits
 │   ├── 📁 train/                     # Training data
@@ -115,8 +150,14 @@ Sentiment-Analyzer/
 ### 📝 File Descriptions
 
 #### **Core Notebooks**
-- **`HyperParamSearch.ipynb`**: Interactive notebook for hyperparameter optimization using Optuna. Contains the complete pipeline from data loading to model evaluation with intelligent parameter search.
-- **`Final_Training.ipynb`**: Production training notebook that uses optimized hyperparameters to train the final model and deploy it to Hugging Face Hub.
+- **`Notebooks/HyperParamSearch.ipynb`**: Interactive notebook for hyperparameter optimization using Optuna. Contains the complete pipeline from data loading to model evaluation with intelligent parameter search.
+- **`Notebooks/Final_Training.ipynb`**: Production training notebook that uses optimized hyperparameters to train the final model and deploy it to Hugging Face Hub.
+
+#### **Flask Web Application**
+- **`app/app.py`**: Main Flask application file containing the web interface for sentiment analysis.
+- **`app/model.py`**: Model loading and prediction functions for the web application.
+- **`app/templates/`**: HTML templates for the web interface including home and results pages.
+- **`app/static/`**: Directory for static assets (CSS, JavaScript, images) for the web application.
 
 #### **Python Modules**
 - **`utility.py`**: Central module containing all reusable functions including data loading, EDA, preprocessing, model configuration, training, and evaluation utilities.
@@ -128,14 +169,15 @@ Sentiment-Analyzer/
 
 #### **Supporting Files**
 - **`widget_repair.py`**: Utility script for fixing Jupyter widget compatibility issues in different environments.
-- **`image.png`**: Sample dataset visualization used in README documentation.
+- **`image/`**: Directory containing project images including dataset visualizations and application screenshots.
 
 ### 🚀 Workflow Integration
 
-1. **Development Phase**: `HyperParamSearch.ipynb` → Find optimal hyperparameters
-2. **Production Phase**: `Final_Training.ipynb` → Train final model with best settings
+1. **Development Phase**: `Notebooks/HyperParamSearch.ipynb` → Find optimal hyperparameters
+2. **Production Phase**: `Notebooks/Final_Training.ipynb` → Train final model with best settings
 3. **Deployment**: Model artifacts in `Yelp_Model/` → Ready for Hugging Face Hub or local serving
-4. **Reusability**: `utility.py` → Modular functions for easy project extension
+4. **Web Application**: Flask app in `app/` → Local web interface for sentiment analysis
+5. **Reusability**: `utility.py` → Modular functions for easy project extension
 
 ## Reusable Functions (from `utility.py`)
 
