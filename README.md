@@ -206,5 +206,5 @@ Sentiment-Analyzer/
 *   Explore other pre-trained models.
 *   Experiment with different hyperparameter optimization techniques.
 *   Investigate more advanced text preprocessing methods.
-*   Deploy the trained model for real-time sentiment analysis.
+*   Deploy the trained model for real-time sentiment analysis.✅
 
