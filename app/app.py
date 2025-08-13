@@ -7,8 +7,8 @@ from werkzeug.exceptions import RequestEntityTooLarge, BadRequest
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from config import config
-from logging_config import get_logger
+from config.config import config
+from config.logging_config import get_logger
 from model import predict, ModelError
 
 # Initialize logger

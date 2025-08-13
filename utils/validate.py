@@ -22,7 +22,7 @@ def test_model_import():
 def test_config_import():
     """Test if we can import configuration."""
     try:
-        from config import config
+        from config.config import config
         print("✅ Config import successful!")
         return True
     except Exception as e:

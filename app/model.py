@@ -6,8 +6,8 @@ from typing import Tuple
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from config import config
-from logging_config import get_logger
+from config.config import config
+from config.logging_config import get_logger
 
 # Initialize logger
 logger = get_logger('model')
