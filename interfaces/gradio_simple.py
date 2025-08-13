@@ -2,8 +2,8 @@ import gradio as gr
 import os
 import sys
 
-# Add current directory to path
-current_dir = os.path.dirname(os.path.abspath(__file__))
+# Add parent directory to path so we can import from app/
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, current_dir)
 
 # Try to import advanced model, fallback to basic if needed
