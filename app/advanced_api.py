@@ -14,7 +14,7 @@ from datetime import datetime
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from advanced_model import get_advanced_analyzer, predict_advanced, predict_batch, get_model_stats
+from .advanced_model import get_advanced_analyzer, predict_advanced, predict_batch, get_model_stats
 from config.config import config
 
 logger = logging.getLogger('sentiment_analyzer.advanced_api')
