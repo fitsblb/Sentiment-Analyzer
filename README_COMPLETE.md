@@ -462,10 +462,11 @@ We welcome contributions to both research and production aspects!
 ```
 
 ### 🙏 **Research Acknowledgments**
-- **🤗 Hugging Face**: For the incredible transformer ecosystem and model hosting
+- **🤗 Hugging Face**: For the incredible transformer ecosystem
 - **🎓 DistilBERT Team**: For the efficient BERT variant enabling this research
-- **� Optuna Team**: For powerful hyperparameter optimization framework
-- **� Yelp**: For providing the open dataset that made this research possible
+- **📊 Cardiff NLP**: For the Twitter-RoBERTa model
+- **💰 FinBERT Team**: For financial sentiment analysis capabilities
+- **🔬 Optuna Team**: For powerful hyperparameter optimization
 
 ---
 

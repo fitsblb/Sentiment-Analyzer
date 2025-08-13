@@ -1,32 +1,355 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sentiment Analyzer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sentiment Analyzer | Analyze Text Sentiment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
             text-align: center;
-            margin-top: 100px;
+            transition: transform 0.3s ease;
         }
 
-        input[type="text"] {
-            width: 300px;
-            padding: 10px;
-            font-size: 16px;
+        .container:hover {
+            transform: translateY(-5px);
         }
 
-        input[type="submit"] {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin-left: 10px;
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .form-container {
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .text-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .char-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.8rem;
+            color: #9ca3af;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 180px;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .analyze-btn:active {
+            transform: translateY(0);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .btn-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .examples {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .examples h3 {
+            color: #374151;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .example-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .example-tag {
+            background: white;
+            color: #4b5563;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .example-tag:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+                margin: 10px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .analyze-btn {
+                width: 100%;
+                padding: 1.2rem;
+            }
+
+            .example-tags {
+                flex-direction: column;
+            }
+
+            .example-tag {
+                text-align: center;
+            }
+        }
+
+        .spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <h1>Sentiment Analyzer</h1>
-    <form method="POST">
-        <input type="text" name="text_input" placeholder="Type your review..." required>
-        <input type="submit" value="Analyze">
-    </form>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">
+                <i class="fas fa-brain"></i>
+                AI Sentiment Analyzer
+            </h1>
+            <p class="subtitle">
+                Analyze the sentiment of any text using advanced machine learning
+            </p>
+        </div>
+
+        <form method="POST" class="form-container" id="sentimentForm">
+            <div class="input-group">
+                <textarea 
+                    name="text_input" 
+                    class="text-input" 
+                    placeholder="Enter your review, comment, or any text to analyze its sentiment..."
+                    required
+                    maxlength="1000"
+                    id="textInput"
+                ></textarea>
+                <div class="char-counter" id="charCounter">0/1000</div>
+            </div>
+            
+            <button type="submit" class="analyze-btn" id="analyzeBtn">
+                <span class="btn-text">
+                    <i class="fas fa-search"></i>
+                    <span id="btnText">Analyze Sentiment</span>
+                </span>
+                <div class="loading" id="loadingSpinner">
+                    <div class="spinner"></div>
+                </div>
+            </button>
+        </form>
+
+        <div class="examples">
+            <h3><i class="fas fa-lightbulb"></i> Try these examples:</h3>
+            <div class="example-tags">
+                <span class="example-tag" onclick="fillExample('This restaurant has amazing food and excellent service!')">Positive Review</span>
+                <span class="example-tag" onclick="fillExample('The movie was okay, nothing special but not terrible either.')">Neutral Opinion</span>
+                <span class="example-tag" onclick="fillExample('Terrible customer service and the food was cold.')">Negative Feedback</span>
+                <span class="example-tag" onclick="fillExample('I absolutely love this product! Best purchase ever!')">Enthusiastic</span>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                <div class="feature-text">Fast Analysis</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="feature-text">Secure & Private</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="feature-text">High Accuracy</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Character counter
+        const textInput = document.getElementById('textInput');
+        const charCounter = document.getElementById('charCounter');
+        
+        textInput.addEventListener('input', function() {
+            const length = this.value.length;
+            charCounter.textContent = length + '/1000';
+            
+            if (length > 800) {
+                charCounter.style.color = '#ef4444';
+            } else if (length > 600) {
+                charCounter.style.color = '#f59e0b';
+            } else {
+                charCounter.style.color = '#9ca3af';
+            }
+        });
+
+        // Example text filler
+        function fillExample(text) {
+            textInput.value = text;
+            textInput.focus();
+            // Trigger the input event to update character counter
+            const event = new Event('input', { bubbles: true });
+            textInput.dispatchEvent(event);
+        }
+
+        // Form submission with loading state
+        const form = document.getElementById('sentimentForm');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const btnText = document.getElementById('btnText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        form.addEventListener('submit', function() {
+            analyzeBtn.disabled = true;
+            btnText.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+        });
+
+        // Auto-resize textarea
+        textInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.max(120, this.scrollHeight) + 'px';
+        });
+    </script>
 </body>
 </html>
