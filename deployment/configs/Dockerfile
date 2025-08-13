@@ -21,15 +21,13 @@ RUN groupadd -r appuser && useradd -r -g appuser appuser
 # Create app directory
 WORKDIR /app
 
-# Copy requirements first for better caching
-COPY requirements-docker.txt ./requirements.txt
+COPY requirements/requirements-docker.txt ./requirements.txt
 
 # Install Python dependencies with minimal footprint (CPU-only PyTorch)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code (excluding large model files)
 COPY --chown=appuser:appuser app/ ./app/
-COPY --chown=appuser:appuser config.py logging_config.py ./
+COPY --chown=appuser:appuser config/config.py config/logging_config.py ./
 
 # Note: Yelp_Model/ is excluded to save storage - will use fallback model
 
