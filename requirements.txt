@@ -1,5 +1,5 @@
 # Requirements for Hugging Face Spaces deployment
-gradio>=3.40.0
+gradio>=4.44.0
 torch>=1.12.0
 transformers>=4.21.0
 datasets>=2.12.0
