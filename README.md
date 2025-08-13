@@ -12,7 +12,7 @@
 
 *A complete journey from academic research to production-ready sentiment analysis with 4 AI models working in harmony*
 
-[🌐 **Live Demo**](https://your-app.railway.app) • [🤖 **Original Model**](https://huggingface.co/fitsblb/YelpReviewsAnalyzer) • [📖 **API Docs**](#-api-documentation) • [🚀 **Deploy Now**](#-quick-deployment)
+[🌐 **Live Demo**](https://huggingface.co/spaces/fitsblb/Sentiment-Analyzer) • [🤖 **Original Model**](https://huggingface.co/fitsblb/YelpReviewsAnalyzer) • [📖 **API Docs**](#-api-documentation) • [🚀 **Deploy Now**](#-production-deployment)
 
 </div>
 
@@ -182,7 +182,7 @@ User Input → Preprocessing → Parallel Execution → Consensus → Response
 ### 📁 **Enhanced Project Structure**
 ```
 Sentiment-Analyzer/
-├── 🚀 app/                           # Production Flask Application
+├── 🚀 app/                           # Core Flask Application
 │   ├── app.py                        # Main Flask app with v1 & v2 APIs
 │   ├── model.py                      # Original research model
 │   ├── advanced_model.py             # Multi-model system (300+ lines)
@@ -190,34 +190,69 @@ Sentiment-Analyzer/
 │   └── templates/                    # Modern web interface
 │       ├── home.html                 # Glass-morphism design
 │       └── result.html               # Enhanced results display
-├── 
+│
+├── ⚙️ config/                        # Configuration Management
+│   ├── config.py                     # Application settings
+│   └── logging_config.py             # Logging configuration
+│
+├── 🚀 deployment/                    # Production Deployment
+│   ├── configs/                      # Platform configurations
+│   │   ├── Dockerfile                # Container setup
+│   │   ├── docker-compose.yml        # Multi-service deployment
+│   │   ├── Procfile                  # Heroku/Railway config
+│   │   └── nginx.conf                # Web server config
+│   ├── guides/                       # Deployment Documentation
+│   │   ├── HUGGINGFACE_DEPLOY_GUIDE.md
+│   │   ├── DOCKER.md
+│   │   └── RENDER_DEPLOY_GUIDE.md
+│   ├── docker-deploy.bat             # Windows deployment script
+│   └── docker-deploy.sh              # Unix deployment script
+│
+├── 📖 docs/                          # Project Documentation
+│   ├── README_COMPLETE.md            # Comprehensive documentation
+│   ├── ADVANCED_FEATURES_SUMMARY.md  # Feature specifications
+│   ├── PHASE2_SUMMARY.md             # Development phases
+│   └── FINAL_CHECKLIST.md            # Production readiness
+│
+├── 🖥️ interfaces/                    # User Interfaces
+│   ├── gradio_advanced.py            # Advanced Gradio interface
+│   └── gradio_simple.py              # Simplified demo interface
+│
+├── 📦 requirements/                  # Dependency Management
+│   ├── requirements-basic.txt        # Minimal dependencies
+│   ├── requirements-docker.txt       # Container-specific
+│   ├── requirements-hf.txt           # Hugging Face Spaces
+│   └── requirements-railway.txt      # Railway deployment
+│
+├── 🧪 tests/                        # Comprehensive Testing Suite
+│   ├── test_app.py                   # Flask application tests
+│   ├── test_model.py                 # Model validation tests
+│   ├── test_advanced_features.py     # Multi-model system tests
+│   ├── test_api.py                   # API endpoint tests
+│   ├── run_tests.py                  # Test runner
+│   └── quick_test.py                 # Quick validation
+│
+├── �️ utils/                        # Utility Functions
+│   ├── utility.py                    # Research utilities
+│   ├── validate.py                   # Validation helpers
+│   └── widget_repair.py              # UI utilities
+│
 ├── 📊 Notebooks/                     # Research & Development
 │   ├── HyperParamSearch.ipynb        # Original Optuna optimization
 │   └── Final_Training.ipynb          # Model training pipeline
-├── 
+│
 ├── 🤖 Yelp_Model/                    # Trained Model Artifacts
 │   ├── config.json                   # Model configuration
 │   ├── model.safetensors            # Fine-tuned weights
 │   ├── tokenizer.json               # Tokenizer from research
 │   └── ...                          # Complete model package
-├── 
+│
 ├── 📁 Pre_processed/                 # Research Datasets
 │   ├── train/                        # Tokenized training data
 │   ├── val/                         # Validation splits
 │   └── test/                        # Test data with metrics
-├── 
-├── 🐳 Deploy/                        # Production Deployment
-│   ├── Dockerfile                    # Container configuration
-│   ├── docker-compose.yml           # Multi-service setup
-│   ├── requirements.txt             # Production dependencies
-│   └── deploy guides/               # Platform-specific guides
-├── 
-├── 🧪 tests/                        # Comprehensive Testing
-│   ├── test_app.py                  # Flask app tests
-│   ├── test_model.py                # Model validation
-│   └── test_advanced_features.py    # Multi-model tests
-├── 
-└── 📋 utility.py                    # Research Utility Functions
+│
+└── 📄 requirements.txt               # Main dependencies
 ```
 
 ### 🔧 **Core Research Functions (utility.py)**
