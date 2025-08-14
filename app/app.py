@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config.config import config
 from config.logging_config import get_logger
-from .model import predict, ModelError
+from model import predict, ModelError
 
 # Initialize logger
 logger = get_logger('app')

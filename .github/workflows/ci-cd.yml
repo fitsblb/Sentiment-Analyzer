@@ -14,7 +14,7 @@ permissions:
 
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: fitsblb/sentiment-analyzer
+  IMAGE_NAME: fitsumblb/sentiment-analyzer
 
 jobs:
   test:
